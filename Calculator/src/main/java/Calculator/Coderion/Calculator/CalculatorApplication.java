@@ -51,7 +51,7 @@ public class CalculatorApplication implements CommandLineRunner {
 		System.out.println("Kwota: " + kwota);
 		System.out.println("Ilosc rat: " + ilosc_rat);
 		System.out.println("Oprocentowanie roczne: " + oprocentowanie_roczne + "%");
-		System.out.println("Liczba rat: " + liczba_rat_miesiac);
+		System.out.println("Liczba rat miesiecznie: " + liczba_rat_miesiac);
 
 		double oprocentowanie_miesieczne = (double) oprocentowanie_roczne / 12 / 100;
 		double Rata_kredytu = kwota * oprocentowanie_miesieczne * Math.pow(1 + oprocentowanie_miesieczne, liczba_rat_miesiac) /
