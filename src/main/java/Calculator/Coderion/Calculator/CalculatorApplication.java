@@ -32,11 +32,7 @@ public class CalculatorApplication implements CommandLineRunner {
 		int ilosc_rat = scanner.nextInt();
 		scanner.nextLine();
 
-		System.out.println("Wpisz oprocentowanie roczne:");
-		while (!scanner.hasNextInt()) {
-			System.out.println("To nie jest poprawna liczba. Wpisz oprocentowanie roczne:");
-			scanner.next();
-		}
+
 
 
 		System.out.println("liczba miesiecznych rat:");
