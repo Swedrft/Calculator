@@ -54,6 +54,6 @@ public class CalculatorApplication implements CommandLineRunner {
 		CalculatorService calculatorService = new CalculatorService();
 		calculatorService.calculate(kwota, liczba_rat_miesiac);
 
-		System.out.println("Rata kredytu: " + CalculatorService.getRataKredytu());
+		System.out.println("Rata kredytu: " + CalculatorService.calculate(kwota,liczba_rat_miesiac));
 	}
 }

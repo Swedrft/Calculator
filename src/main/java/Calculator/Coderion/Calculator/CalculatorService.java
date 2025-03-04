@@ -14,8 +14,6 @@ public class CalculatorService {
         return rataKredytu;
     }
 
-    public BigDecimal getRataKredytu() {
-        return rataKredytu;
-    }
+
 }
 
