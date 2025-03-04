@@ -1,4 +1,6 @@
- import java.util.Scanner;
+package Calculator.Coderion.Calculator;
+
+import java.util.Scanner;
 public class CalculatorService {
     public void calculate(){
         Scanner scanner = new Scanner(System.in);
