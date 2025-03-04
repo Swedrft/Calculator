@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class CalculatorService {
-    private BigDecimal rataKredytu;
+    public BigDecimal rataKredytu;
 
     public BigDecimal calculate(int kwota, int liczba_rat_miesiac) {
         int oprocentowanie_roczne = 23;
