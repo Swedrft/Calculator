@@ -3,6 +3,8 @@ package Calculator.Coderion.Calculator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -49,5 +51,9 @@ public class CalculatorApplication implements CommandLineRunner {
 		System.out.println("Liczba rat miesiecznie: " + liczba_rat_miesiac);
 	CalculatorService CalculatorService= new CalculatorService();
 	CalculatorService.calculate(kwota,liczba_rat_miesiac);
+		CalculatorService calculatorService = new CalculatorService();
+		calculatorService.calculate(kwota, liczba_rat_miesiac);
+
+		System.out.println("Rata kredytu: " + CalculatorService.getRataKredytu());
 	}
 }
