@@ -31,29 +31,17 @@ public class CalculatorApplication implements CommandLineRunner {
 			System.out.println("To nie jest poprawna liczba. Wpisz ilosc rat:");
 			scanner.next();
 		}
-		int ilosc_rat = scanner.nextInt();
+		int liczba_rat = scanner.nextInt();
 		scanner.nextLine();
 
-
-
-
-		System.out.println("liczba miesiecznych rat:");
-		while (!scanner.hasNextInt()) {
-			System.out.println("To nie jest poprawna liczba. Wpisz liczba miesiecznych rat:");
-			scanner.next();
-		}
-		int liczba_rat_miesiac = scanner.nextInt();
-		scanner.nextLine();
 
 		System.out.println("Kwota: " + kwota);
-		System.out.println("Ilosc rat: " + ilosc_rat);
+		System.out.println("Ilosc rat: " + liczba_rat);
 		System.out.println("Oprocentowanie roczne: " + 23 + "%");
-		System.out.println("Liczba rat miesiecznie: " + liczba_rat_miesiac);
 	CalculatorService CalculatorService= new CalculatorService();
-	CalculatorService.calculate(kwota,liczba_rat_miesiac);
-		CalculatorService calculatorService = new CalculatorService();
-		calculatorService.calculate(kwota, liczba_rat_miesiac);
 
-		System.out.println("Rata kredytu: " + CalculatorService.calculate(kwota,liczba_rat_miesiac));
+
+
+		System.out.println("Rata kredytu: " + CalculatorService.calculate(kwota,liczba_rat));
 	}
 }
