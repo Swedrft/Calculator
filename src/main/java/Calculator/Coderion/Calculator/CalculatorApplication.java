@@ -19,6 +19,14 @@ public class CalculatorApplication implements CommandLineRunner {
 		Scanner scanner = new Scanner(System.in);
 		int suma_odsetek= (int) 571.04;
 
+		System.out.println("Wpisz Datę kredytu:");
+		while (!scanner.hasNextInt()) {
+			System.out.println("To nie jest poprawna Data. Wpisz datę:");
+			scanner.next();
+		}
+		int Data = scanner.nextInt();
+		scanner.next();
+
 		System.out.println("Wpisz kwote:");
 		while (!scanner.hasNextInt()) {
 			System.out.println("To nie jest poprawna liczba. Wpisz kwote:");
@@ -40,6 +48,7 @@ public class CalculatorApplication implements CommandLineRunner {
 		System.out.println("Ilosc rat: " + liczba_rat);
 		System.out.println("Oprocentowanie roczne: " + 23 + "%");
 		System.out.println( "Suma odsetek: " +suma_odsetek+ "zl" );
+
 	CalculatorService CalculatorService= new CalculatorService();
 
 
