@@ -38,7 +38,7 @@ public class CalculatorApplication implements CommandLineRunner {
 		int liczba_rat = scanner.nextInt();
 		scanner.nextLine();
 
-		int Rata_kapitalowa_techniczna = (int) kwota / liczba_rat;
+		int Rata_kapitalowa_techniczna = kwota / liczba_rat;
 		BigDecimal zaokraglona_Rata_kapitalowa = BigDecimal.valueOf(Rata_kapitalowa_techniczna).setScale(2, RoundingMode.HALF_UP);
 
 
