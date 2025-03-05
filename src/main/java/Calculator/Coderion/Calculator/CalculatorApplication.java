@@ -48,7 +48,7 @@ public class CalculatorApplication implements CommandLineRunner {
 		System.out.println("Ilosc rat: " + liczba_rat);
 		System.out.println("Oprocentowanie roczne: " + 23 + "%");
 		System.out.println( "Suma odsetek: " +suma_odsetek+ "zl" );
-
+		System.out.println("Data kredytu: "+Data);
 	CalculatorService CalculatorService= new CalculatorService();
 
 
