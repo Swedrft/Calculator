@@ -17,6 +17,7 @@ public class CalculatorApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Scanner scanner = new Scanner(System.in);
+		int suma_odsetek= (int) 571.04;
 
 		System.out.println("Wpisz kwote:");
 		while (!scanner.hasNextInt()) {
@@ -38,10 +39,11 @@ public class CalculatorApplication implements CommandLineRunner {
 		System.out.println("Kwota: " + kwota);
 		System.out.println("Ilosc rat: " + liczba_rat);
 		System.out.println("Oprocentowanie roczne: " + 23 + "%");
+		System.out.println( "Suma odsetek: " +suma_odsetek+ "zl" );
 	CalculatorService CalculatorService= new CalculatorService();
 
 
 
-		System.out.println("Rata kredytu: " + CalculatorService.calculate(kwota,liczba_rat));
+		System.out.println("Rata kredytu: " + CalculatorService.calculate(kwota,liczba_rat,suma_odsetek));
 	}
 }
