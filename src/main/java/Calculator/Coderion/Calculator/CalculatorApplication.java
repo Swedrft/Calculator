@@ -33,8 +33,8 @@ public class CalculatorApplication implements CommandLineRunner {
 		}
 		int liczbaRat = scanner.nextInt();
 
-		//int suma_odsetek =;
-		int karencjaWMiesiacach = 0;
+
+
 		LocalDate dataPoczatkowa = LocalDate.now();
 		System.out.println("Kwota: " + kwota);
 		System.out.println("Ilosc rat: " + liczbaRat);
