@@ -14,7 +14,7 @@ public class CalculatorServiceTest {
 
         int kwota = 5000;
         int liczba_rat = 6;
-        LocalDate dataPoczatkowa = LocalDate.now();
+        LocalDate dataPoczatkowa = LocalDate.parse("2025-03-07");
 
 
         CalculatorService calculatorService = new CalculatorService();
@@ -43,5 +43,8 @@ public class CalculatorServiceTest {
 
         assertEquals(6, raty.get(5).getNumerRaty());
         assertEquals(LocalDate.of(2025, 9, 10), raty.get(0).getTerminPlatnosci());
+
+
     }
-}
+    }
+
