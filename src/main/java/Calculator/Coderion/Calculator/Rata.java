@@ -3,24 +3,32 @@ package Calculator.Coderion.Calculator;
 import java.time.LocalDate;
 
 public class Rata {
-    private final int numerRaty;
-    private final LocalDate terminPlatnosci;
+    private int numer;
+    private LocalDate terminPlatnosci;
+    private long iloscDni;
 
-    public Rata(int numerRaty, LocalDate terminPlatnosci) {
-        this.numerRaty = numerRaty;
+    public Rata(int numer, LocalDate terminPlatnosci, long iloscDni) {
+        this.numer = numer;
         this.terminPlatnosci = terminPlatnosci;
+        this.iloscDni = iloscDni;
     }
 
     public int getNumerRaty() {
-        return numerRaty;
+        return numer;
     }
 
     public LocalDate getTerminPlatnosci() {
         return terminPlatnosci;
     }
 
+    public long getIloscDni() {
+        return iloscDni;
+    }
+
     @Override
     public String toString() {
-        return "Rata nr: " + numerRaty + ", Termin platnosci: " + terminPlatnosci;
+        return "Numer raty: " + numer +
+                ", Termin platnosci: " + terminPlatnosci +
+                ", Liczba dni na splate: " + iloscDni;
     }
 }
