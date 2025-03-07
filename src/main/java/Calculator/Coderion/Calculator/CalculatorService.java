@@ -11,9 +11,9 @@ public class CalculatorService {
 
     public BigDecimal rataKredytu;
     private static final int KARENCJA_W_MIESIACACH = 0;
-
+    private static final  int oprocentowanie_roczne = 23;
     public List<Rata> calculate(int kwota, int liczba_rat, LocalDate dataPoczatkowa) {
-        int oprocentowanie_roczne = 23;
+
         double oprocentowanie_miesieczne = (double) oprocentowanie_roczne / 12 / 100;
 
         List<Rata> raty = new ArrayList<>();
