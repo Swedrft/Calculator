@@ -11,14 +11,6 @@ public class Rata {
         this.terminPlatnosci = terminPlatnosci;
     }
 
-    public static String numerRaty() {
-        return numerRaty();
-    }
-
-    public static String terminPlatnosci() {
-        return terminPlatnosci();
-    }
-
     public int getNumerRaty() {
         return numerRaty;
     }
