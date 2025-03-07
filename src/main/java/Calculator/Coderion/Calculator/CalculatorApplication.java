@@ -24,7 +24,7 @@ public class CalculatorApplication implements CommandLineRunner {
 			System.out.println("To nie jest poprawna liczba. Wpisz kwote:");
 			scanner.next();
 		}
-		int kwota = scanner.nextInt();
+		 int kwota = scanner.nextInt();
 
 		System.out.println("Wpisz liczbe rat:");
 		while (!scanner.hasNextInt()) {
@@ -33,17 +33,17 @@ public class CalculatorApplication implements CommandLineRunner {
 		}
 		int liczbaRat = scanner.nextInt();
 
-		int suma_odsetek = (int) 571.04;
+		//int suma_odsetek =;
 		int karencjaWMiesiacach = 0;
-		LocalDate dataPoczatkowa = LocalDate.of(2025, 3, 6);
+		LocalDate dataPoczatkowa = LocalDate.now();
 		System.out.println("Kwota: " + kwota);
 		System.out.println("Ilosc rat: " + liczbaRat);
 		System.out.println("Oprocentowanie roczne: " + 23 + "%");
-		System.out.println( "Suma odsetek: " +suma_odsetek+ "zl" );
+		//System.out.println( "Suma odsetek: " +suma_odsetek+ "zl" );
 
 
 		CalculatorService calculatorService = new CalculatorService();
-		List<Rata> raty = calculatorService.calculate(kwota, liczbaRat, suma_odsetek, dataPoczatkowa, karencjaWMiesiacach);
+		List<Rata> raty = calculatorService.calculate(kwota, liczbaRat, dataPoczatkowa, karencjaWMiesiacach);
 
 		System.out.println("Harmonogram rat:");
 		raty.forEach(System.out::println);
