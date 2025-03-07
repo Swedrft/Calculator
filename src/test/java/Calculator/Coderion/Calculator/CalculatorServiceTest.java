@@ -15,36 +15,33 @@ public class CalculatorServiceTest {
         int kwota = 5000;
         int liczba_rat = 6;
         LocalDate dataPoczatkowa = LocalDate.now();
-        int karencjaWMiesiacach = 0;
 
 
         CalculatorService calculatorService = new CalculatorService();
 
 
-        List<Rata> raty = calculatorService.calculate(kwota, liczba_rat, dataPoczatkowa, karencjaWMiesiacach);
+        List<Rata> raty = calculatorService.calculate(kwota, liczba_rat, dataPoczatkowa);
 
 
         assertNotNull(raty, "Lista rat nie może być nullem");
         assertEquals(liczba_rat, raty.size(), "Liczba rat powinna być zgodna");
 
+        assertEquals(1, raty.get(0).getNumerRaty());
+        assertEquals(LocalDate.of(2025, 4, 10), raty.get(0).getTerminPlatnosci());
 
-        for (int i = 0; i < raty.size(); i++) {
-            Rata rata = raty.get(i);
+        assertEquals(2, raty.get(1).getNumerRaty());
+        assertEquals(LocalDate.of(2025, 5, 10), raty.get(0).getTerminPlatnosci());
 
-            // Numer raty
-            assertEquals(i + 1, rata.getNumerRaty(), "Numer raty powinien być zgodny");
+        assertEquals(3, raty.get(2).getNumerRaty());
+        assertEquals(LocalDate.of(2025, 6, 10), raty.get(0).getTerminPlatnosci());
 
+        assertEquals(4, raty.get(3).getNumerRaty());
+        assertEquals(LocalDate.of(2025, 7, 10), raty.get(0).getTerminPlatnosci());
 
-            LocalDate oczekiwanaData = dataPoczatkowa.plusMonths(i + 1 + karencjaWMiesiacach).withDayOfMonth(10);
-            assertEquals(oczekiwanaData, rata.getTerminPlatnosci(), "Data raty powinna być zgodna");
+        assertEquals(5, raty.get(4).getNumerRaty());
+        assertEquals(LocalDate.of(2025, 8, 10), raty.get(0).getTerminPlatnosci());
 
-
-            long liczbaDniNaSplate = ChronoUnit.DAYS.between(
-                    dataPoczatkowa.plusMonths(i).withDayOfMonth(10), oczekiwanaData);
-
-
-            System.out.println("Numer raty: " + rata.getNumerRaty() + ", Data: " + rata.getTerminPlatnosci() +
-                    ", Oczekiwane dni: " + liczbaDniNaSplate);
-        }
+        assertEquals(6, raty.get(5).getNumerRaty());
+        assertEquals(LocalDate.of(2025, 9, 10), raty.get(0).getTerminPlatnosci());
     }
 }

@@ -43,7 +43,7 @@ public class CalculatorApplication implements CommandLineRunner {
 
 
 		CalculatorService calculatorService = new CalculatorService();
-		List<Rata> raty = calculatorService.calculate(kwota, liczbaRat, dataPoczatkowa, karencjaWMiesiacach);
+		List<Rata> raty = calculatorService.calculate(kwota, liczbaRat, dataPoczatkowa);
 
 		System.out.println("Harmonogram rat:");
 		raty.forEach(System.out::println);

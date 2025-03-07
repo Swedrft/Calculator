@@ -8,15 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorService {
-    public BigDecimal rataKredytu;
 
-    public List<Rata> calculate(int kwota, int liczba_rat, LocalDate dataPoczatkowa, int karencjaWMiesiacach) {
+    public BigDecimal rataKredytu;
+    private static final int KARENCJA_W_MIESIACACH = 0;
+
+    public List<Rata> calculate(int kwota, int liczba_rat, LocalDate dataPoczatkowa) {
         int oprocentowanie_roczne = 23;
         double oprocentowanie_miesieczne = (double) oprocentowanie_roczne / 12 / 100;
-        //double rata_kredytu = (double) (kwota + suma_odsetek) / liczba_rat;
-
-        //rataKredytu = BigDecimal.valueOf(rata_kredytu).setScale(2, RoundingMode.HALF_UP);
-
 
         List<Rata> raty = new ArrayList<>();
         LocalDate data = dataPoczatkowa;
@@ -25,19 +23,17 @@ public class CalculatorService {
             LocalDate wynikowaData;
 
             if (data.getDayOfMonth() >= 21) {
-                wynikowaData = data.plusMonths(2 + karencjaWMiesiacach).withDayOfMonth(10);
+                wynikowaData = data.plusMonths(2 + KARENCJA_W_MIESIACACH).withDayOfMonth(10);
             } else {
                 wynikowaData = data.plusMonths(1).withDayOfMonth(10);
             }
 
             long liczba_dni_na_splate = ChronoUnit.DAYS.between(data, wynikowaData);
 
-
             Rata rata = new Rata(i, wynikowaData);
             raty.add(rata);
 
-            System.out.println("Liczba rat: " + i +  " | Liczba dni na splate: " + liczba_dni_na_splate);
-
+            System.out.println("Liczba rat: " + i + " | Liczba dni na splate: " + liczba_dni_na_splate);
 
             data = wynikowaData;
         }
