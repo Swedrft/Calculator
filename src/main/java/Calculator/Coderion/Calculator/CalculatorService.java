@@ -11,7 +11,7 @@ public class CalculatorService {
         List<Rata> raty = new ArrayList<>();
         LocalDate data = dataPoczatkowa;
 
-        // Pętla dla każdej raty
+
         for (int i = 1; i <= liczba_rat; i++) {
             LocalDate wynikowaData;
 
@@ -23,11 +23,11 @@ public class CalculatorService {
 
             long liczbaDniNaSplate = ChronoUnit.DAYS.between(data, wynikowaData);
 
-            // Tworzymy nową ratę i dodajemy do listy
+
             Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate);
             raty.add(rata);
 
-            // Aktualizujemy "data" na kolejną datę płatności
+
             data = wynikowaData;
         }
 
