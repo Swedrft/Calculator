@@ -8,9 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorService {
+    public BigDecimal rataKredytu;
+    private static final int KARENCJA_W_MIESIACACH = 0;
+    private static final  int oprocentowanie_roczne = 23;
+    private static final  int dzien_splaty_raty=10;
+
+
     public List<Rata> calculate(double kwota, int liczba_rat, LocalDate dataPoczatkowa) {
         List<Rata> raty = new ArrayList<>();
         LocalDate data = dataPoczatkowa;
+
 
 
         double prowizja_operacyjna_brutto =337.66;
