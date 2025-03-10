@@ -1,16 +1,23 @@
 package Calculator.Coderion.Calculator;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorService {
-
-    public List<Rata> calculate(int kwota, int liczba_rat, LocalDate dataPoczatkowa) {
+    public List<Rata> calculate(double kwota, int liczba_rat, LocalDate dataPoczatkowa) {
         List<Rata> raty = new ArrayList<>();
         LocalDate data = dataPoczatkowa;
 
+
+        double prowizja_operacyjna_brutto =337.66;
+        double wysokosc_raty = (kwota + prowizja_operacyjna_brutto)/liczba_rat;
+
+
+        double rataKapitalowaTechniczna = kwota / liczba_rat;
 
         for (int i = 1; i <= liczba_rat; i++) {
             LocalDate wynikowaData;
@@ -22,16 +29,22 @@ public class CalculatorService {
             }
 
             long liczbaDniNaSplate = ChronoUnit.DAYS.between(data, wynikowaData);
-
-
-            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate);
-            raty.add(rata);
-
-
             data = wynikowaData;
+
+            kwota -= wysokosc_raty;
+
+
+            double dziennaStopaProcentowa = 0.23 / 365;
+            double odsetki = kwota*dziennaStopaProcentowa*liczbaDniNaSplate;
+
+
+            BigDecimal zaokragloneOdsetki = new BigDecimal(odsetki).setScale(2, RoundingMode.HALF_UP);
+
+
+            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, zaokragloneOdsetki.doubleValue());
+            raty.add(rata);
         }
 
         return raty;
     }
-
 }
