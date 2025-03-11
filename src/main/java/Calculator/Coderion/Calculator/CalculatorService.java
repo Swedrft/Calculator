@@ -6,51 +6,64 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class CalculatorService {
     public BigDecimal rataKredytu;
     private static final int KARENCJA_W_MIESIACACH = 0;
-    private static final  int oprocentowanie_roczne = 23;
-    private static final  int dzien_splaty_raty=10;
-
+    private static final int oprocentowanie_roczne = 23;
+    private static final int dzien_splaty_raty = 10;
 
     public List<Rata> calculate(double kwota, int liczba_rat, LocalDate dataPoczatkowa) {
         List<Rata> raty = new ArrayList<>();
         LocalDate data = dataPoczatkowa;
 
+        BigDecimal suma_odsetki = BigDecimal.ZERO;
 
+        BigDecimal prowizjaOperacyjnaBrutto = BigDecimal.valueOf(337.66);
+        BigDecimal wysokoscRaty = BigDecimal.valueOf(kwota)
+                .add(prowizjaOperacyjnaBrutto)
+                .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
 
-        double prowizja_operacyjna_brutto =337.66;
-        double wysokosc_raty = (kwota + prowizja_operacyjna_brutto)/liczba_rat;
+        BigDecimal rataKapitalowaTechniczna = BigDecimal.valueOf(kwota)
+                .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
 
+        BigDecimal pozostalyKapital = BigDecimal.valueOf(kwota);
 
-        double rataKapitalowaTechniczna = kwota / liczba_rat;
 
         for (int i = 1; i <= liczba_rat; i++) {
-            LocalDate wynikowaData;
-
-            if (data.getDayOfMonth() >= 21) {
-                wynikowaData = data.plusMonths(2).withDayOfMonth(10);
-            } else {
-                wynikowaData = data.plusMonths(1).withDayOfMonth(10);
+            if (pozostalyKapital.compareTo(BigDecimal.ZERO) <= 0) {
+                pozostalyKapital = BigDecimal.ZERO;
+                break;
             }
+
+            LocalDate wynikowaData = (data.getDayOfMonth() >= 21)
+                    ? data.plusMonths(2).withDayOfMonth(10)
+                    : data.plusMonths(1).withDayOfMonth(10);
 
             long liczbaDniNaSplate = ChronoUnit.DAYS.between(data, wynikowaData);
             data = wynikowaData;
 
-            kwota -= wysokosc_raty;
+            BigDecimal dziennaStopaProcentowa = BigDecimal.valueOf(oprocentowanie_roczne)
+                    .divide(BigDecimal.valueOf(100), 10, RoundingMode.HALF_UP)
+                    .divide(BigDecimal.valueOf(365), 10, RoundingMode.HALF_UP);
 
+            BigDecimal odsetki = pozostalyKapital
+                    .multiply(dziennaStopaProcentowa)
+                    .multiply(BigDecimal.valueOf(liczbaDniNaSplate))
+                    .setScale(2, RoundingMode.HALF_UP);
 
-            double dziennaStopaProcentowa = 0.23 / 365;
-            double odsetki = kwota*dziennaStopaProcentowa*liczbaDniNaSplate;
-
-
-            BigDecimal zaokragloneOdsetki = new BigDecimal(odsetki).setScale(2, RoundingMode.HALF_UP);
-
-
-            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, zaokragloneOdsetki.doubleValue());
+            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, odsetki.doubleValue());
             raty.add(rata);
+
+
+              suma_odsetki = suma_odsetki.add(odsetki).setScale(2, RoundingMode.HALF_UP);
+
+            pozostalyKapital = pozostalyKapital.subtract(rataKapitalowaTechniczna).setScale(2, RoundingMode.HALF_UP);
         }
+
+
+        System.out.println("Suma odsetek: " + suma_odsetki + " zl");
 
         return raty;
     }
