@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 
 public class CalculatorService {
     public BigDecimal rataKredytu;
@@ -14,7 +13,7 @@ public class CalculatorService {
     private static final int oprocentowanie_roczne = 23;
     private static final int dzien_splaty_raty = 10;
 
-    public List<Rata> calculate(double kwota, int liczba_rat, LocalDate dataPoczatkowa) {
+    public Oferta calculate(double kwota, int liczba_rat, LocalDate dataPoczatkowa) {
         List<Rata> raty = new ArrayList<>();
         LocalDate data = dataPoczatkowa;
 
@@ -29,7 +28,6 @@ public class CalculatorService {
                 .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
 
         BigDecimal pozostalyKapital = BigDecimal.valueOf(kwota);
-
 
         for (int i = 1; i <= liczba_rat; i++) {
             if (pozostalyKapital.compareTo(BigDecimal.ZERO) <= 0) {
@@ -56,15 +54,11 @@ public class CalculatorService {
             Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, odsetki.doubleValue());
             raty.add(rata);
 
-
-              suma_odsetki = suma_odsetki.add(odsetki).setScale(2, RoundingMode.HALF_UP);
+            suma_odsetki = suma_odsetki.add(odsetki).setScale(2, RoundingMode.HALF_UP);
 
             pozostalyKapital = pozostalyKapital.subtract(rataKapitalowaTechniczna).setScale(2, RoundingMode.HALF_UP);
         }
 
-
-        System.out.println("Suma odsetek: " + suma_odsetki + " zl");
-
-        return raty;
+        return new Oferta(raty, suma_odsetki);
     }
 }
