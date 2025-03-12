@@ -1,4 +1,4 @@
-package Calculator.Coderion.Calculator;
+package pl.coderion.Calculator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class CalculatorService {
     public BigDecimal rataKredytu;
@@ -13,21 +14,18 @@ public class CalculatorService {
     private static final int oprocentowanie_roczne = 23;
     private static final int dzien_splaty_raty = 10;
 
-    public Oferta calculate(double kwota, int liczba_rat, LocalDate dataPoczatkowa) {
+    public Oferta calculate(BigDecimal kwota, int liczba_rat, LocalDate dataPoczatkowa) {
         List<Rata> raty = new ArrayList<>();
         LocalDate data = dataPoczatkowa;
 
         BigDecimal suma_odsetki = BigDecimal.ZERO;
 
         BigDecimal prowizjaOperacyjnaBrutto = BigDecimal.valueOf(337.66);
-        BigDecimal wysokoscRaty = BigDecimal.valueOf(kwota)
-                .add(prowizjaOperacyjnaBrutto)
+
+        BigDecimal rataKapitalowaTechniczna = kwota
                 .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
 
-        BigDecimal rataKapitalowaTechniczna = BigDecimal.valueOf(kwota)
-                .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
-
-        BigDecimal pozostalyKapital = BigDecimal.valueOf(kwota);
+        BigDecimal pozostalyKapital = kwota;
 
         for (int i = 1; i <= liczba_rat; i++) {
             if (pozostalyKapital.compareTo(BigDecimal.ZERO) <= 0) {
@@ -58,7 +56,11 @@ public class CalculatorService {
 
             pozostalyKapital = pozostalyKapital.subtract(rataKapitalowaTechniczna).setScale(2, RoundingMode.HALF_UP);
         }
+        BigDecimal wysokoscRaty = kwota
+                .add(suma_odsetki)
+                .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
 
-        return new Oferta(raty, suma_odsetki);
+
+        return new Oferta(raty, suma_odsetki, wysokoscRaty);
     }
 }
