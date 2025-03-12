@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -36,16 +37,23 @@ public class CalculatorApplication implements CommandLineRunner {
 
 
 		LocalDate dataPoczatkowa = LocalDate.now();
+
+
 		System.out.println("Kwota: " + kwota);
 		System.out.println("Ilosc rat: " + liczbaRat);
 		System.out.println("Oprocentowanie roczne: " + 23 + "%");
-		//System.out.println( "Suma odsetek: " +suma_odsetek+ "zl" );
+		//System.out.println( "Suma odsetek: " +Suma_odsetki+ "zl" );
 
 
 		CalculatorService calculatorService = new CalculatorService();
-		List<Rata> raty = calculatorService.calculate(kwota, liczbaRat, dataPoczatkowa);
+		Oferta oferta = calculatorService.calculate(kwota, liczbaRat, dataPoczatkowa);
 
 		System.out.println("Harmonogram rat:");
-		raty.forEach(System.out::println);
+		oferta.getRaty().forEach(System.out::println);
+
+		System.out.println("Suma odsetek: " + oferta.getSumaOdsetki() + " zl");
+
+
+
 	}
 }
