@@ -1,4 +1,4 @@
-package Calculator.Coderion.Calculator;
+package pl.coderion.Calculator;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
