@@ -2,7 +2,7 @@ package pl.coderion.Calculator;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.function.BiFunction;
+
 
 public class Oferta {
     private List<Rata> raty;
