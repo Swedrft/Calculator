@@ -1,9 +1,12 @@
 package pl.coderion.Calculator;
 
-import org.springframework.web.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -17,17 +20,11 @@ class CalculationRequest {
 }
 
 
-@org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = "/api/calculate")
+@RequiredArgsConstructor
 public class RestController {
 
-    private CalculatorService calculatorService;
-
-    public RestController(CalculatorService calculatorService) {
-        this.calculatorService = calculatorService;
-    }
-
-
+    private final CalculatorService calculatorService;
 
     @PostMapping
     public Oferta calculate(@RequestBody CalculationRequest request) {
@@ -38,5 +35,3 @@ public class RestController {
         );
     }
 }
-
-
