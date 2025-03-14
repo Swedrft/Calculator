@@ -21,6 +21,9 @@ public class Rata {
 
     }
 
+    public Rata(int numer, BigDecimal bigDecimal, LocalDate now) {
+    }
+
 
     public BigDecimal getSumaodsetek(){return sumaodsetek;}
 
