@@ -2,14 +2,19 @@ package pl.coderion.Calculator;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculatorServiceTest {
+
+
+
 
     static Stream<TestCase> provideTestCases() {
         return Stream.of(
@@ -73,6 +78,11 @@ public class CalculatorServiceTest {
         }
     }
 
+
+
+
+
+
     static class TestCase {
         BigDecimal kwota;
         int liczbaRat;
@@ -90,6 +100,8 @@ public class CalculatorServiceTest {
             this.terminPlatnosci = terminPlatnosci;
             this.iloscDni = iloscDni;
             this.odsetki = odsetki;
+
+
         }
     }
 }

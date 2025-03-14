@@ -1,5 +1,6 @@
 package pl.coderion.Calculator;
 
+import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
+@Service
 public class CalculatorService {
     public BigDecimal rataKredytu;
     private static final int KARENCJA_W_MIESIACACH = 0;
