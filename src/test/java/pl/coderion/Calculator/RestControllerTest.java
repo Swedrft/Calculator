@@ -15,8 +15,10 @@ public class RestControllerTest {
     void calculateShouldReturnOfertaWhenInputIsValid() {
 
         CalculatorService mockService = mock(CalculatorService.class);
-        List<Rata> mockRaty = List.of(new Rata(1, BigDecimal.valueOf(100), LocalDate.now()));
-        Oferta mockOferta = new Oferta(mockRaty, BigDecimal.valueOf(50), BigDecimal.valueOf(150));
+        List<Rata> rata = List.of(new Rata(1, LocalDate.now(), 30, 5.0));
+
+
+        Oferta mockOferta = new Oferta(rata, BigDecimal.valueOf(50), BigDecimal.valueOf(150));
         when(mockService.calculate(
                 BigDecimal.valueOf(5000), 6, LocalDate.of(2025, 3, 7)))
                 .thenReturn(mockOferta);
