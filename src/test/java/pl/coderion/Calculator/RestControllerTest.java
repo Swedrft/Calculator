@@ -51,8 +51,8 @@ public class RestControllerTest {
 
 
         CalculationRequest request = new CalculationRequest();
-        request.setKwota(BigDecimal.valueOf(-100)); // Niepoprawna kwota
-        request.setLiczbaRat(0); // Niepoprawna liczba rat
+        request.setKwota(BigDecimal.valueOf(-100));
+        request.setLiczbaRat(0);
         request.setDataPoczatkowa(LocalDate.of(2025, 3, 7));
 
 
