@@ -38,7 +38,7 @@ public class Rata {
     }
 
 
-    public BigDecimal getSumaodsetek(){return sumaodsetek;}
+
 
     public double getOdsetki() {
         return odsetki;

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -26,7 +27,7 @@ public class RestController {
 
     private final CalculatorService calculatorService;
 
-    @PostMapping
+    @Autowired
     public Oferta calculate(@RequestBody CalculationRequest request) {
         return calculatorService.calculate(
                 request.getKwota(),
