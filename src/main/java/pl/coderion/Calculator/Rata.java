@@ -28,7 +28,7 @@ public class Rata {
     @Getter
     @ToString
     @AllArgsConstructor
-    public class rata {
+    public class RaTa {
         private int numer;
         private LocalDate terminPlatnosci;
         private long iloscDni;
