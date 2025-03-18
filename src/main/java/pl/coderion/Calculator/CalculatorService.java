@@ -22,7 +22,7 @@ public class CalculatorService {
 
         BigDecimal suma_odsetki = BigDecimal.ZERO;
 
-        BigDecimal prowizjaOperacyjnaBrutto = BigDecimal.valueOf(337.66);
+        double prowizjaOperacyjnaBrutto = 337.66;
 
         BigDecimal rataKapitalowaTechniczna = kwota
                 .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
@@ -51,7 +51,7 @@ public class CalculatorService {
                     .multiply(BigDecimal.valueOf(liczbaDniNaSplate))
                     .setScale(2, RoundingMode.HALF_UP);
 
-            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, odsetki.doubleValue());
+            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, odsetki.doubleValue(),suma_odsetki,prowizjaOperacyjnaBrutto);
             raty.add(rata);
 
             suma_odsetki = suma_odsetki.add(odsetki).setScale(2, RoundingMode.HALF_UP);
