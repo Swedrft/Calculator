@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,13 +19,13 @@ class CalculationRequest {
 }
 
 
-@RequestMapping(value = "/api/calculate")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class RestController {
 
     private final CalculatorService calculatorService;
 
-    @Autowired
+    @PostMapping("/calculate")
     public Oferta calculate(@RequestBody CalculationRequest request) {
         return calculatorService.calculate(
                 request.getKwota(),

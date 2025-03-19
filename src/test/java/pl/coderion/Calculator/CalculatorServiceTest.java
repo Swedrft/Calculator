@@ -67,7 +67,7 @@ public class CalculatorServiceTest {
 
             for (int i = 0; i < testCase.numerRaty.length; i++) {
                 Rata rata = oferta.getRaty().get(i);
-                assertEquals(testCase.numerRaty[i], rata.getNumerRaty(), "Numer raty powinien być zgodny");
+                assertEquals(testCase.numerRaty[i], rata.getNumer(), "Numer raty powinien być zgodny");
                 assertEquals(testCase.terminPlatnosci[i], rata.getTerminPlatnosci(), "Termin płatności powinien być zgodny");
                 assertEquals(testCase.iloscDni[i], rata.getIloscDni(), "Liczba dni powinna być zgodna");
 
