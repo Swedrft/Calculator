@@ -18,7 +18,7 @@ class CalculationRequest {
     private LocalDate dataPoczatkowa;
 }
 
-
+@org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class RestController {
