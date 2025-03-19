@@ -11,6 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculatorServiceTest {
 
+
+
+
     static Stream<TestCase> provideTestCases() {
         return Stream.of(
 
@@ -62,7 +65,7 @@ public class CalculatorServiceTest {
 
             for (int i = 0; i < testCase.numerRaty.length; i++) {
                 Rata rata = oferta.getRaty().get(i);
-                assertEquals(testCase.numerRaty[i], rata.getNumerRaty(), "Numer raty powinien być zgodny");
+                assertEquals(testCase.numerRaty[i], rata.getNumer(), "Numer raty powinien być zgodny");
                 assertEquals(testCase.terminPlatnosci[i], rata.getTerminPlatnosci(), "Termin płatności powinien być zgodny");
                 assertEquals(testCase.iloscDni[i], rata.getIloscDni(), "Liczba dni powinna być zgodna");
 
@@ -72,6 +75,11 @@ public class CalculatorServiceTest {
             }
         }
     }
+
+
+
+
+
 
     static class TestCase {
         BigDecimal kwota;
@@ -90,6 +98,8 @@ public class CalculatorServiceTest {
             this.terminPlatnosci = terminPlatnosci;
             this.iloscDni = iloscDni;
             this.odsetki = odsetki;
+
+
         }
     }
 }

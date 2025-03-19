@@ -1,13 +1,15 @@
 package pl.coderion.Calculator;
 
+import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 
+
+@Service
 public class CalculatorService {
     public BigDecimal rataKredytu;
     private static final int KARENCJA_W_MIESIACACH = 0;
@@ -20,7 +22,7 @@ public class CalculatorService {
 
         BigDecimal suma_odsetki = BigDecimal.ZERO;
 
-        BigDecimal prowizjaOperacyjnaBrutto = BigDecimal.valueOf(337.66);
+        double prowizjaOperacyjnaBrutto = 337.66;
 
         BigDecimal rataKapitalowaTechniczna = kwota
                 .divide(BigDecimal.valueOf(liczba_rat), 2, RoundingMode.HALF_UP);
@@ -49,7 +51,7 @@ public class CalculatorService {
                     .multiply(BigDecimal.valueOf(liczbaDniNaSplate))
                     .setScale(2, RoundingMode.HALF_UP);
 
-            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, odsetki.doubleValue());
+            Rata rata = new Rata(i, wynikowaData, liczbaDniNaSplate, odsetki.doubleValue(),suma_odsetki,prowizjaOperacyjnaBrutto);
             raty.add(rata);
 
             suma_odsetki = suma_odsetki.add(odsetki).setScale(2, RoundingMode.HALF_UP);
