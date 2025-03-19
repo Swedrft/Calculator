@@ -1,4 +1,4 @@
-package pl.coderion.Calculator;
+package pl.coderion.calculator;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package pl.coderion.Calculator;
+package pl.coderion.calculator;
 
 import java.math.BigDecimal;
 import java.util.List;

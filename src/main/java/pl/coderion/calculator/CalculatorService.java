@@ -1,4 +1,4 @@
-package pl.coderion.Calculator;
+package pl.coderion.calculator;
 
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
