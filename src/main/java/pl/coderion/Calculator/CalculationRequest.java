@@ -1,4 +1,5 @@
 package pl.coderion.Calculator;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
