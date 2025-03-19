@@ -15,7 +15,5 @@ public class CalculationRequest {
     private int liczbaRat;
     private LocalDate dataPoczatkowa;
 
-    public CalculationRequest() {
 
-    }
 }
