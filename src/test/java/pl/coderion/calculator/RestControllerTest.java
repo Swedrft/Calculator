@@ -15,39 +15,50 @@ public class RestControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
-    void calculateShouldReturnOfertaWhenInputIsValid() {
+        @Test
+        void calculateShouldHandleVariousCases() {
 
 
-        CalculationRequest request = new CalculationRequest(
-                BigDecimal.valueOf(5000), // Amount
-                6,                        // Installments
-                LocalDate.of(2025, 3, 18) // Date
-        );
+            CalculationRequest validRequest = new CalculationRequest(
+                    BigDecimal.valueOf(5000),
+                    6,
+                    LocalDate.of(2025, 3, 18)
+            );
+            ResponseEntity<Oferta> validResponse = sendRequest(validRequest, Oferta.class);
+            assertEquals(HttpStatus.OK, validResponse.getStatusCode(), "Przypadek 1: Oczekiwany status OK.");
+            assertNotNull(validResponse.getBody(), "Przypadek 1: Oferta nie powinna być null.");
+
+            Oferta oferta = validResponse.getBody();
+            assertNotNull(oferta.getRaty(), "Przypadek 1: Raty w odpowiedzi nie powinny być null.");
+            BigDecimal expectedInstallment = BigDecimal.valueOf(833.33); // Przykładowa oczekiwana rata
+            assertEquals(expectedInstallment, oferta.getRaty().get(0), "Przypadek 1: Pierwsza rata nie zgadza się z oczekiwaną wartością.");
 
 
-        assertTrue(request.getKwota().compareTo(BigDecimal.ZERO) > 0);
-        assertTrue(request.getLiczbaRat() > 0);
+            CalculationRequest zeroRatsRequest = new CalculationRequest(
+                    BigDecimal.valueOf(5000),
+                    0,
+                    LocalDate.of(2025, 3, 18)
+            );
+            ResponseEntity<String> zeroRatsResponse = sendRequest(zeroRatsRequest, String.class);
+            assertEquals(HttpStatus.BAD_REQUEST, zeroRatsResponse.getStatusCode(), "Przypadek 2: Oczekiwany status BAD_REQUEST.");
 
 
-        HttpEntity<CalculationRequest> httpEntity = new HttpEntity<>(request);
+            CalculationRequest negativeKwotaRequest = new CalculationRequest(
+                    BigDecimal.valueOf(-1000),
+                    6,
+                    LocalDate.of(2025, 4, 1)
+            );
+            ResponseEntity<String> negativeKwotaResponse = sendRequest(negativeKwotaRequest, String.class);
+            assertEquals(HttpStatus.BAD_REQUEST, negativeKwotaResponse.getStatusCode(), "Przypadek 3: Oczekiwany status BAD_REQUEST.");
+        }
 
-
-        ResponseEntity<Oferta> response = restTemplate.exchange(
-                "/api/calculate",
-                HttpMethod.POST,
-                httpEntity,
-                Oferta.class
-        );
-
-
-        assertNotNull(response.getBody(), "Response body should not be null");
-        assertEquals(HttpStatus.OK, response.getStatusCode(), "HTTP status should be OK");
-        assertNotNull(response.getBody().getRaty(), "Field 'raty' should not be null");
-
-
-        Oferta oferta = response.getBody();
-        System.out.println("Received offer: " + oferta);
-        assertNotNull(oferta.getRaty(), "Installments in the offer should not be null");
+        private <T> ResponseEntity<T> sendRequest(CalculationRequest request, Class<T> responseType) {
+            HttpEntity<CalculationRequest> httpEntity = new HttpEntity<>(request);
+            return restTemplate.exchange(
+                    "/api/calculate",
+                    HttpMethod.POST,
+                    httpEntity,
+                    responseType
+            );
+        }
     }
-}
