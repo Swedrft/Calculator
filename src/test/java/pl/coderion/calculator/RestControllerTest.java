@@ -84,6 +84,7 @@ public class RestControllerTest {
         );
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+
     }
 
     @PostMapping("/api/calculate")
@@ -100,5 +101,7 @@ public class RestControllerTest {
         Oferta oferta = new Oferta();
 
         return ResponseEntity.ok(oferta);
+
     }
+
 }
