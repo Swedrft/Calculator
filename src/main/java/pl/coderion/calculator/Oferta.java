@@ -15,6 +15,10 @@ public class Oferta {
         this.Wysokoscraty = Wysokosc_raty;
     }
 
+    public Oferta() {
+
+    }
+
     public List<Rata> getRaty() {
         return raty;
     }
