@@ -21,7 +21,7 @@ public class CalculationRequest {
     @Min(value = 1,message = "Liczba rat nie moze być zerem" )
     private int liczbaRat;
 
-    @NotNull(message = "data poczatkowa nie moze być pusta")
+    @NotNull
     private LocalDate dataPoczatkowa;
 
 }
