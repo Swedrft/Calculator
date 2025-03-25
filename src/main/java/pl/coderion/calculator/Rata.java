@@ -16,7 +16,7 @@ public class Rata {
     private long iloscDni;
     private double odsetki;
     private BigDecimal sumaodsetek;
-    private double prowizja_operacyjna;
+
 
 
 

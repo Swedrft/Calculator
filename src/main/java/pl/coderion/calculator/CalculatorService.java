@@ -1,5 +1,6 @@
 package pl.coderion.calculator;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,8 +12,8 @@ import java.util.List;
 
 @Service
 public class CalculatorService {
-    private static final int oprocentowanie_roczne = 23;
-
+    @Value("${stawka.vat}")
+    private BigDecimal stawkaVat;
     public Oferta calculate(BigDecimal kwota, int liczba_rat, LocalDate dataPoczatkowa) {
 
         if (kwota == null || kwota.compareTo(BigDecimal.ZERO) <= 0) {
@@ -39,7 +40,7 @@ public class CalculatorService {
             long dniNaSplate = ChronoUnit.DAYS.between(data, terminPlatnosci);
             data = terminPlatnosci;
 
-            BigDecimal dziennaStopaProcentowa = BigDecimal.valueOf(oprocentowanie_roczne)
+            BigDecimal dziennaStopaProcentowa = stawkaVat
                     .divide(BigDecimal.valueOf(100), 10, RoundingMode.HALF_UP)
                     .divide(BigDecimal.valueOf(365), 10, RoundingMode.HALF_UP);
 
@@ -51,7 +52,7 @@ public class CalculatorService {
             sumaOdsetki = sumaOdsetki.add(odsetki);
             pozostalyKapital = pozostalyKapital.subtract(rataKapitalowaTechniczna);
 
-            Rata rata = new Rata(i, terminPlatnosci, dniNaSplate, odsetki.doubleValue(), sumaOdsetki, 337.66);
+            Rata rata = new Rata(i, terminPlatnosci, dniNaSplate, odsetki.doubleValue(), sumaOdsetki);
             raty.add(rata);
         }
 
