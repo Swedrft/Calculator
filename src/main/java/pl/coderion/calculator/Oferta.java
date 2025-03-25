@@ -1,41 +1,25 @@
 package pl.coderion.calculator;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-
+@Data
+@AllArgsConstructor
 public class Oferta {
-    @Getter
+
     private List<Rata> raty;
-    private BigDecimal suma_odsetki;
-    static BigDecimal Wysokoscraty;
-
-    public Oferta(List<Rata> raty, BigDecimal suma_odsetki,BigDecimal Wysokosc_raty) {
-        this.raty = raty;
-        this.suma_odsetki = suma_odsetki;
-        this.Wysokoscraty = Wysokosc_raty;
-    }
-
-    public Oferta() {
-
-    }
-
-    public BigDecimal getSumaOdsetki() {
-        return suma_odsetki;
-    }
-
-    public BigDecimal getWysokoscraty(){
-        return Wysokoscraty;
-    }
+    private BigDecimal sumaOdsetki;
+    private BigDecimal wysokoscRaty;
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Oferta:\n");
         raty.forEach(rata -> builder.append(rata.toString()).append("\n"));
-        builder.append("Suma odsetek: ").append(suma_odsetki).append(" zl");
+        builder.append("Suma odsetek: ").append(sumaOdsetki).append(" zl");
         return builder.toString();
     }
 }
