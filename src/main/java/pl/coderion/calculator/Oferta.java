@@ -1,10 +1,13 @@
-package pl.coderion.Calculator;
+package pl.coderion.calculator;
+
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 
 public class Oferta {
+    @Getter
     private List<Rata> raty;
     private BigDecimal suma_odsetki;
     static BigDecimal Wysokoscraty;
@@ -15,8 +18,8 @@ public class Oferta {
         this.Wysokoscraty = Wysokosc_raty;
     }
 
-    public List<Rata> getRaty() {
-        return raty;
+    public Oferta() {
+
     }
 
     public BigDecimal getSumaOdsetki() {
