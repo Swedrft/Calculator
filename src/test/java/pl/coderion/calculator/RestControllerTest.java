@@ -20,6 +20,7 @@ public class RestControllerTest {
     @Test
     void testValidCalculationRequest() {
 
+
         CalculationRequest request = new CalculationRequest(
                 BigDecimal.valueOf(5000),
                 6,
@@ -27,6 +28,8 @@ public class RestControllerTest {
         );
 
         HttpEntity<CalculationRequest> httpEntity = new HttpEntity<>(request);
+
+
         ResponseEntity<Oferta> response = restTemplate.exchange(
                 "/api/calculate",
                 HttpMethod.POST,
@@ -36,7 +39,27 @@ public class RestControllerTest {
 
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
+
+
+        Oferta oferta = response.getBody();
+        assertNotNull(oferta);
+
+
+        assertEquals(BigDecimal.valueOf(885.41), oferta.getWysokoscRaty());
+
+
+        assertNotNull(oferta.getRaty());
+        assertEquals(6, oferta.getRaty().size());
+
+       Rata rata1 = oferta.getRaty().get(0);
+       assertEquals(6,oferta.getRaty().size());
+       assertEquals(1,rata1.getNumer());
+       assertEquals(23,rata1.getIloscDni());
+       assertEquals(72.47,rata1.getOdsetki());
+
+
     }
+
 
     @Test
     void testZeroInstallmentsShouldReturnBadRequest() {

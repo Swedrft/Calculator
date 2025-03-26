@@ -2,10 +2,12 @@ package pl.coderion.calculator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Getter
 @Data
 @AllArgsConstructor
 public class Oferta {
